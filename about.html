@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Shri Vitthal-Rakhumai Temple, ABC Village</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root { 
+            --primary-dark: #2c1810; 
+            --primary-medium: #5d4037; 
+            --primary-light: #8b5a3c; 
+            --accent-gold: #d4af37; 
+            --accent-yellow: #ffd700; 
+            --accent-cream: #f5e8c8; 
+            --text-dark: #2c1810; 
+            --text-light: #f5e8c8; 
+            --white: #ffffff; 
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--accent-cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 90px;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary-dark);
+            box-shadow: 0 2px 15px rgba(0,0,0,.2);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        /* Shift brand slightly left */
+        .navbar .container { padding-left: 6px; }
+        @media (min-width: 992px) { .navbar .container { padding-left: 0; } }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent-gold) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover img {
+            transform: rotate(5deg);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--accent-cream) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-yellow) !important;
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-nav .nav-link.active::after,
+        .navbar-nav .nav-link[aria-current="page"]::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(rgba(44,24,16,.7), rgba(44,24,16,.7)), url('https://source.unsplash.com/random/1600x900/?temple,india') no-repeat center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+            z-index: 1;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-yellow);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+        
+        .breadcrumb {
+            background-color: transparent;
+            justify-content: center;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--accent-yellow);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-cream);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--accent-cream);
+        }
+        
+        /* Section Styling */
+        .section-padding {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+        
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--accent-gold);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: var(--accent-cream);
+            border: 4px solid var(--accent-gold);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--white);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 5px solid var(--accent-gold);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .timeline-content .timeline-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid var(--accent-gold);
+            margin-bottom: 12px;
+        }
+        
+        /* Cards */
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            text-align: center;
+            border-top: 3px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-yellow));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* God Info Section */
+        .god-info {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .god-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-yellow));
+        }
+        
+        /* Village Info */
+        .village-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            border-right: 5px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .village-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-yellow));
+        }
+        
+        .village-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        /* About ABC Village background */
+        .village-section {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('images/about_village.jpg') center/cover no-repeat;
+        }
+        .village-section .section-title { color: var(--accent-cream); }
+        .village-section .container { position: relative; z-index: 1; }
+        .village-section::before { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.1); }
+
+        .god-section { position: relative; background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('images/hero3.jpg') center/cover no-repeat; }
+        .god-section .section-title { color: var(--accent-cream); }
+        .god-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.25); z-index: 0; }
+        .god-section .container { position: relative; z-index: 1; }
+        .god-info { background: rgba(255,255,255,0.92); border-radius: 12px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-left: 5px solid var(--accent-gold); }
+        
+        
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-yellow));
+        }
+        
+        .footer-links h5 {
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links ul li:hover {
+            transform: translateX(5px);
+        }
+        
+        .footer-links ul li a {
+            color: var(--accent-cream);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links ul li a i {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .footer-links ul li a:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* Footer & Contact: remove default blue/purple link effect */
+        footer a:link,
+        footer a:visited {
+            color: var(--accent-cream) !important;
+            text-decoration: none !important;
+        }
+        footer a:hover,
+        footer a:active {
+            color: var(--accent-yellow) !important;
+            text-decoration: none !important;
+        }
+        .contact-info a:link,
+        .contact-info a:visited { color: inherit !important; text-decoration: none !important; }
+        .contact-info a:hover,
+        .contact-info a:active { color: var(--accent-gold) !important; text-decoration: none !important; }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            color: var(--accent-cream);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-yellow));
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--primary-dark);
+        }
+        
+        .social-icons a:hover::before {
+            transform: scale(1);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+      body { padding-top: 70px; }
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+                right: auto;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/Logo.png" alt="Temple Logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDBDOC45NTQgMCAwIDguOTU0IDAgMjBTOC45NTQgNDAgMjAgNDBTNDAgMzEuMDQ2IDQwIDIwUzMxLjA0NiAwIDIwIDBaIiBmaWxsPSIjZDRhZjM3Ii8+CjxwYXRoIGQ9Ik0yMCAxMEMxNi4xMzQgMTAgMTMgMTMuMTM0IDEzIDE3QzEzIDIwLjg2NiAxNi4xMzQgMjQgMjAgMjRDMjMuODY2IDI0IDI3IDIwLjg2NiAyNyAxN0MyNyAxMy4xMzQgMjMuODY2IDEwIDIwIDEwWiIgZmlsbD0iIzJjMTgxMCIvPgo8cGF0aCBkPSJNMTUgMTVDMTUgMTQuNDQ4IDE1LjQ0OCAxNCAxNiAxNEgyNEMyNC41NTIgMTQgMjUgMTQuNDQ4IDI1IDE1QzI1IDE1LjU1MiAyNC41NTIgMTYgMjQgMTZIMTZDMTUuNDQ4IDE2IDE1IDE1LjU1MiAxNSAxNVoiIGZpbGw9IiMyYzE4MTAiLz4KPHBhdGggZD0iTTE1IDIwQzE1IDE5LjQ0OCAxNS40NDggMTkgMTYgMTlIMjRDMjQuNTUyIDE5IDI1IDE5LjQ0OCAyNSAyMEMyNSAyMC41NTIgMjQuNTUyIDIxIDI0IDIxSDE2QzE1LjQ0OCAyMSAxNSAyMC41NTIgMTUgMjBaIiBmaWxsPSIjMmMxODEwIi8+Cjwvc3ZnPgo='">
+                <span>Shri Vitthal-Rakhumai Temple</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="donation.html">Donation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="section-title">Temple History and Significance</h2>
+                    <p class="fade-in">The Vitthal-Rakhumai Temple in ABC Village was founded over 50 years ago by devoted villagers. The temple has been the spiritual heart of our community, guiding generations toward peace and devotion.</p>
+                    <p class="fade-in">Legend has it that the temple was established after a divine vision appeared to the village elders, directing them to build a shrine dedicated to Lord Vitthal and Goddess Rakhumai. Since then, the temple has been a beacon of faith and spirituality for the entire region.</p>
+                    
+                    <div class="mt-5">
+                        <h3 class="mb-4">Our Journey Through Time</h3>
+                        <div class="timeline">
+                            <div class="timeline-item fade-in">
+                                <div class="timeline-content">
+                                    <div class="timeline-year">1970</div>
+                                    <img class="timeline-img" src="images/temple_old.png" alt="Foundation laid - early temple photo">
+                                    <h4>Foundation Laid</h4>
+                                    <p>The temple foundation was laid by village elders after receiving divine guidance in their dreams.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item fade-in">
+                                <div class="timeline-content">
+                                    <div class="timeline-year">1972</div>
+                                    <img class="timeline-img" src="images/hero3.jpg" alt="First sanctum completed">
+                                    <h4>First Sanctum</h4>
+                                    <p>The first sanctum was completed and the initial idols of Lord Vitthal and Goddess Rakhumai were installed.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item fade-in">
+                                <div class="timeline-content">
+                                    <div class="timeline-year">1985</div>
+                                    <img class="timeline-img" src="images/community.jpg" alt="Temple expansion works">
+                                    <h4>Expansion</h4>
+                                    <p>The temple underwent its first major expansion to accommodate the growing number of devotees.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item fade-in">
+                                <div class="timeline-content">
+                                    <div class="timeline-year">2005</div>
+                                    <img class="timeline-img" src="images/golden_jubli.jpg" alt="Golden jubilee celebration">
+                                    <h4>Golden Jubilee</h4>
+                                    <p>Celebrated 50 years of spiritual service to the community with special ceremonies and events.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item fade-in">
+                                <div class="timeline-content">
+                                    <div class="timeline-year">2023</div>
+                                    <img class="timeline-img" src="images/new_temple.jpg" alt="New temple project rendering">
+                                    <h4>New Temple Project</h4>
+                                    <p>Launched the initiative to build a new, larger temple to serve future generations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding god-section">
+        <div class="god-overlay"></div>
+        <div class="container">
+            <h2 class="section-title">About Lord Vitthal and Goddess Rakhumai</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="god-info fade-in">
+                        <p>Lord Vitthal, also known as Vithoba, is a form of the Hindu god Vishnu. He is usually depicted as a dark young boy, standing on a brick, with his arms akimbo. Goddess Rakhumai (also known as Rukmini) is his consort, representing devotion and love.</p>
+                        <p>The divine couple symbolizes the ideal relationship between the devotee and the divine, where the devotee (represented by Rakhumai) offers unconditional love and devotion to God (represented by Vitthal).</p>
+                        <p>Many historians and researchers tried to find out the etymological origin of the word "Vitthal". Some scholars believe that it is a distorted form of the original word Vishnu. The words like Vitharas, Vitta found in various Kannad epigraphs are basically the elaboration of the word Vishnu.</p>
+                        <p>The Great Saint poet Tukaram defines the word Vithoba in one of his abhangas that stands for 'Knowledge' + Thoba Stands for 'form' Thus Vithoba stands for the form of ultimate Knowledge or 'Idol of ultimate Knowledge'.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Temple Trust Vision</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <p class="text-center mb-5 fade-in">We are constructing a new temple to serve more devotees and preserve our cultural and spiritual heritage. The new temple will feature:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 fade-in">
+                            <div class="feature-card">
+                                <i class="fas fa-praying-hands"></i>
+                                <h4>Expanded Prayer Hall</h4>
+                                <p>Spacious area to accommodate more devotees during festivals and special occasions.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 fade-in">
+                            <div class="feature-card">
+                                <i class="fas fa-archway"></i>
+                                <h4>Traditional Architecture</h4>
+                                <p>Modern facilities while preserving authentic traditional temple architecture.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 fade-in">
+                            <div class="feature-card">
+                                <i class="fas fa-users"></i>
+                                <h4>Community Center</h4>
+                                <p>Dedicated space for spiritual and cultural activities for all age groups.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 fade-in">
+                            <div class="feature-card">
+                                <i class="fas fa-book"></i>
+                                <h4>Spiritual Library</h4>
+                                <p>Comprehensive collection of religious texts and scriptures for study and reference.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding village-section">
+        <div class="container">
+            <h2 class="section-title">About ABC Village</h2>
+            <div class="row align-items-stretch">
+                <div class="col-lg-6 fade-in">
+                    <div class="village-card">
+                        <h3 class="mb-3">Our Serene Community</h3>
+                        <p>ABC Village is a serene and vibrant community located in the heart of Maharashtra. Known for its unity and culture, the village celebrates Kartiki Ekadashi with great devotion every year.</p>
+                        <p>The village is surrounded by lush green fields and is known for its warm, welcoming residents who take great pride in their cultural heritage and spiritual traditions.</p>
+                        <p>Our village maintains a perfect balance between modern development and preservation of traditional values, making it an ideal place for spiritual growth and community living.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in">
+                    <div class="village-card">
+                        <h3 class="mb-3">Cultural Heritage</h3>
+                        <p>ABC Village has a rich cultural heritage that dates back centuries. The community celebrates various festivals throughout the year with great enthusiasm and devotion.</p>
+                        <p>Traditional arts, music, and dance forms are preserved and passed down through generations, keeping our cultural identity alive and vibrant.</p>
+                        <p>The village is also known for its traditional crafts and culinary specialties that reflect the authentic Maharashtrian culture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5>Shri Vitthal-Rakhumai Temple</h5>
+                    <p>A sacred place of devotion, peace, and unity in ABC Village, Maharashtra.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0 footer-links">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5>Contact Info</h5>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> ABC Village, Maharashtra</a></li>
+                        <li><a href="tel:+919876543210"><i class="fas fa-phone"></i> +91-9876543210</a></li>
+                        <li><a href="mailto:templetrust@abc.com"><i class="fas fa-envelope"></i> templetrust@abc.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>Temple Timings</h5>
+                    <ul>
+                        <li><i class="fas fa-sun"></i> Morning: 5:30 AM - 12:00 PM</li>
+                        <li><i class="fas fa-moon"></i> Evening: 4:00 PM - 9:00 PM</li>
+                        <li><i class="fas fa-calendar-day"></i> Open all days</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Shri Vitthal-Rakhumai Temple Trust. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = function() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check
+        fadeInOnScroll();
+    </script>
+</body>
+</html>
