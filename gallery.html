@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Shri Vitthal-Rakhumai Temple, ABC Village</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root { 
+            --primary-dark: #2c1810; 
+            --primary-medium: #5d4037; 
+            --primary-light: #8b5a3c; 
+            --accent-gold: #d4af37; 
+            --accent-yellow: #ffd700; 
+            --accent-cream: #f5e8c8; 
+            --text-dark: #2c1810; 
+            --text-light: #f5e8c8; 
+            --white: #ffffff; 
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--accent-cream);
+            line-height: 1.6;
+            padding-top: 90px;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary-dark);
+            box-shadow: 0 2px 15px rgba(0,0,0,.2);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        /* Shift brand slightly left */
+        .navbar .container { padding-left: 6px; }
+        @media (min-width: 992px) { .navbar .container { padding-left: 0; } }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent-gold) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover img {
+            transform: rotate(5deg);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--accent-cream) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-yellow) !important;
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-nav .nav-link.active::after,
+        .navbar-nav .nav-link[aria-current="page"]::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(rgba(44,24,16,.7), rgba(44,24,16,.7)), url('https://source.unsplash.com/random/1600x900/?temple,india') no-repeat center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+            z-index: 1;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-yellow);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+        
+        .breadcrumb {
+            background-color: transparent;
+            justify-content: center;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--accent-yellow);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-cream);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--accent-cream);
+        }
+        
+        /* Section Styling */
+        .section-padding {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+        
+        /* Gallery Filter */
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .filter-btn {
+            background-color: var(--white);
+            border: 2px solid var(--primary-light);
+            color: var(--primary-dark);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Gallery Items */
+        .gallery-container {
+            position: relative;
+        }
+        /* Add space between gallery items */
+        .gallery-container .row {
+            --bs-gutter-x: 2rem;
+            --bs-gutter-y: 2rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 3px solid var(--primary-light);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        /* Responsive Video Wrapper */
+        .gallery-item .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            background: #000;
+        }
+        .gallery-item .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .gallery-item .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(44,24,16,0.95));
+            color: var(--text-light);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .gallery-caption h5 {
+            color: var(--accent-yellow);
+            margin-bottom: 5px;
+        }
+        
+        .gallery-caption p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Image Modal */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .image-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: var(--accent-yellow);
+            transform: rotate(90deg);
+        }
+        
+        .modal-caption {
+            color: var(--white);
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-yellow));
+        }
+        
+        .footer-links h5 {
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links ul li:hover {
+            transform: translateX(5px);
+        }
+        
+        .footer-links ul li a {
+            color: var(--accent-cream);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links ul li a i {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .footer-links ul li a:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* Footer & Contact: remove default blue/purple link effect */
+        footer a:link,
+        footer a:visited {
+            color: var(--accent-cream) !important;
+            text-decoration: none !important;
+        }
+        footer a:hover,
+        footer a:active {
+            color: var(--accent-yellow) !important;
+            text-decoration: none !important;
+        }
+        .contact-info a:link,
+        .contact-info a:visited { color: inherit !important; text-decoration: none !important; }
+        .contact-info a:hover,
+        .contact-info a:active { color: var(--accent-gold) !important; text-decoration: none !important; }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            color: var(--accent-cream);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-yellow));
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--primary-dark);
+        }
+        
+        .social-icons a:hover::before {
+            transform: scale(1);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .gallery-filter {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/Logo.png" alt="Temple Logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDBDOC45NTQgMCAwIDguOTU0IDAgMjBTOC45NTQgNDAgMjAgNDBTNDAgMzEuMDQ2IDQwIDIwUzMxLjA0NiAwIDIwIDBaIiBmaWxsPSIjZDRhZjM3Ii8+CjxwYXRoIGQ9Ik0yMCAxMEMxNi4xMzQgMTAgMTMgMTMuMTM0IDEzIDE3QzEzIDIwLjg2NiAxNi4xMzQgMjQgMjAgMjRDMjMuODY2IDI0IDI3IDIwLjg2NiAyNyAxN0MyNyAxMy4xMzQgMjMuODY2IDEwIDIwIDEwWiIgZmlsbD0iIzJjMTgxMCIvPgo8cGF0aCBkPSJNMTUgMTVDMTUgMTQuNDQ4IDE1LjQ0OCAxNCAxNiAxNEgyNEMyNC41NTIgMTQgMjUgMTQuNDQ4IDI1IDE1QzI1IDE1LjU1MiAyNC41NTIgMTYgMjQgMTZIMTZDMTUuNDQ4IDE2IDE1IDE1LjU1MiAxNSAxNVoiIGZpbGw9IiMyYzE4MTAiLz4KPHBhdGggZD0iTTE1IDIwQzE1IDE5LjQ0OCAxNS40NDggMTkgMTYgMTlIMjRDMjQuNTUyIDE5IDI1IDE5LjQ0OCAyNSAyMEMyNSAyMC41NTIgMjQuNTUyIDIxIDI0IDIxSDE2QzE1LjQ0OCAyMSAxNSAyMC41NTIgMTUgMjBaIiBmaWxsPSIjMmMxODEwIi8+Cjwvc3ZnPgo='">
+                <span>Shri Vitthal-Rakhumai Temple</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="donation.html">Donation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="temple">Temple</button>
+                <button class="filter-btn" data-filter="festivals">Festivals</button>
+                <button class="filter-btn" data-filter="community">Community</button>
+                <button class="filter-btn" data-filter="devotion">Devotion</button>
+                <button class="filter-btn" data-filter="videos">Videos</button>
+            </div>
+            
+            <div class="gallery-container">
+                <div class="row g-4">
+                    <!-- Temple Moments -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="temple">
+                        <img src="images/temple_old.png" alt="Main Temple">
+                        <div class="gallery-caption">
+                            <h5>Main Temple</h5>
+                            <p>Our beautiful temple during morning hours</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="devotion">
+                        <img src="images/prayer.jpg" alt="Prayer">
+                        <div class="gallery-caption">
+                            <h5>Evening Aarti</h5>
+                            <p>Devotees during evening aarti</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="temple">
+                        <img src="images/hero4.jpg" alt="Temple Night">
+                        <div class="gallery-caption">
+                            <h5>Decorated Temple</h5>
+                            <p>Decorated temple at night during festival</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Kartiki Ekadashi Celebrations -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="festivals">
+                        <img src="images/festival.png" alt="Festival">
+                        <div class="gallery-caption">
+                            <h5>Kartiki Ekadashi</h5>
+                            <p>Devotees celebrating Kartiki Ekadashi</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="festivals">
+                        <img src="images/bhajan.jpg" alt="Bhajan">
+                        <div class="gallery-caption">
+                            <h5>Bhajan Session</h5>
+                            <p>Devotees singing bhajans during festival</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="festivals">
+                        <img src="images/Yatra.jpg" alt="Yatra">
+                        <div class="gallery-caption">
+                            <h5>Maha Yatra</h5>
+                            <p>Devotees participating in the Maha Yatra procession</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Community and Devotion -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="community">
+                        <img src="images/community.jpg" alt="Community">
+                        <div class="gallery-caption">
+                            <h5>Community Gathering</h5>
+                            <p>Villagers gathering for temple activities</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="temple">
+                        <img src="images/new_temple.jpg" alt="Construction">
+                        <div class="gallery-caption">
+                            <h5>New Temple Construction</h5>
+                            <p>Progress on our new temple project</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="community">
+                        <img src="images/volunteer.jpg" alt="Volunteer">
+                        <div class="gallery-caption">
+                            <h5>Volunteers</h5>
+                            <p>Devotees volunteering for temple activities</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Images -->
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="devotion">
+                        <img src="images/palakhi.jpg" alt="Devotee Praying">
+                        <div class="gallery-caption">
+                            <h5>Deep Devotion</h5>
+                            <p>A devotee immersed in prayer</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="devotion">
+                        <img src="images/palakhi2.jpg" alt="Palakhi Procession">
+                        <div class="gallery-caption">
+                            <h5>Palakhi Procession</h5>
+                            <p>Devotees carrying the palakhi with devotion</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="devotion">
+                        <img src="images/bhakt.jpg" alt="Devoted Bhakt">
+                        <div class="gallery-caption">
+                            <h5>Devoted Bhakt</h5>
+                            <p>A bhakt offering prayers with deep faith</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="festivals">
+                        <img src="images/hero2.png" alt="Festival Lights">
+                        <div class="gallery-caption">
+                            <h5>Festival of Lights</h5>
+                            <p>Temple decorated during Diwali celebrations</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="community">
+                        <img src="images/kids_flower.jpg" alt="Giving Flowers to Kids">
+                        <div class="gallery-caption">
+                            <h5>Giving Flowers to Kids</h5>
+                            <p>Honoring kids for doing well in competitions with flowers and blessings</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Videos -->
+                      <div class="col-lg-6 col-md-6 gallery-item" data-category="videos" data-type="video">
+                        <div class="video-wrapper">
+                            <video controls preload="metadata" playsinline>
+                                <source src="images/evening_arti.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="gallery-caption">
+                            <h5>Evening Aarti</h5>
+                            <p>Sacred aarti rituals during the evening</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 gallery-item" data-category="videos" data-type="video">
+                        <div class="video-wrapper">
+                            <video controls preload="metadata" playsinline>
+                                <source src="images/kirtan.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="gallery-caption">
+                            <h5>Bhajan Kirtan</h5>
+                            <p>Devotional kirtan performed outside the temple</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 gallery-item" data-category="videos" data-type="video">
+                        <div class="video-wrapper">
+                            <video controls preload="metadata" playsinline>
+                                <source src="images/lezim_nrutya.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="gallery-caption">
+                            <h5>Lezim Nrutya</h5>
+                            <p>Traditional Lezim Nrutya performance</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 gallery-item" data-category="videos" data-type="video">
+                        <div class="video-wrapper">
+                            <video controls preload="metadata" playsinline>
+                                <source src="images/bhajan.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="gallery-caption">
+                            <h5>Bhajan Kirtan</h5>
+                            <p>Devotional bhajans performed at the temple</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="image-modal">
+        <div class="modal-content">
+            <div class="modal-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <img src="" alt="">
+            <div class="modal-caption">
+                <h4></h4>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5>Shri Vitthal-Rakhumai Temple</h5>
+                    <p>A sacred place of devotion, peace, and unity in ABC Village, Maharashtra.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0 footer-links">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                        <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5>Contact Info</h5>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> ABC Village, Maharashtra</a></li>
+                        <li><a href="tel:+919876543210"><i class="fas fa-phone"></i> +91-9876543210</a></li>
+                        <li><a href="mailto:templetrust@abc.com"><i class="fas fa-envelope"></i> templetrust@abc.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>Temple Timings</h5>
+                    <ul>
+                        <li><i class="fas fa-sun"></i> Morning: 5:30 AM - 12:00 PM</li>
+                        <li><i class="fas fa-moon"></i> Evening: 4:00 PM - 9:00 PM</li>
+                        <li><i class="fas fa-calendar-day"></i> Open all days</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Shri Vitthal-Rakhumai Temple Trust. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Gallery Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.querySelector('.image-modal');
+            const modalImg = modal.querySelector('img');
+            const modalTitle = modal.querySelector('.modal-caption h4');
+            const modalDesc = modal.querySelector('.modal-caption p');
+            const modalClose = modal.querySelector('.modal-close');
+            
+            // Filter functionality
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, 100);
+                        } else {
+                            item.classList.remove('visible');
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 400);
+                        }
+                    });
+                });
+            });
+            
+            // Image modal functionality (skip video items)
+            galleryItems.forEach(item => {
+                if (item.dataset.type === 'video') return;
+                const imgEl = item.querySelector('img');
+                if (!imgEl) return;
+                item.addEventListener('click', function() {
+                    const imgSrc = imgEl.getAttribute('src');
+                    const title = this.querySelector('h5') ? this.querySelector('h5').textContent : '';
+                    const desc = this.querySelector('p') ? this.querySelector('p').textContent : '';
+                    modalImg.setAttribute('src', imgSrc);
+                    modalTitle.textContent = title;
+                    modalDesc.textContent = desc;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal
+            modalClose.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside the image
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Initialize gallery items as visible
+            setTimeout(() => {
+                galleryItems.forEach(item => {
+                    item.classList.add('visible');
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
